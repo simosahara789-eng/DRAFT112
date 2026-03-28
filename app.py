@@ -121,7 +121,7 @@ def publish_draft(api_key: str, listing_id: Any) -> Tuple[bool, str]:
             else:
                 return False, format_publish_error(response)
                 
-        except Exception as e:
+        except Exception:
             continue
     
     details, details_error = check_listing_details(api_key, listing_id)
@@ -200,11 +200,7 @@ def publish_all_drafts_safely(api_key: str, drafts: List[Dict[str, Any]]) -> Dic
 
 def delete_draft(api_key: str, listing_id: Any) -> Tuple[bool, str]:
     """Delete a draft listing"""
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Accept-Version": "3.0",
-        "Content-Type": "application/json"
-    }
+    headers = build_headers(api_key)
     
     try:
         response = requests.delete(
