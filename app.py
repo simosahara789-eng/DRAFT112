@@ -214,8 +214,8 @@ def delete_draft(api_key: str, listing_id: Any) -> Tuple[bool, str]:
         else:
             return False, f"Error: {response.status_code}"
             
-    except Exception as e:
-        return False, str(e)
+    except Exception as exc:
+        return False, str(exc)
 
 def check_listing_details(api_key: str, listing_id: Any) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
     """Get detailed information about a listing"""
